@@ -1,0 +1,76 @@
+//3.10.2
+/* 
+ C program to implement PDA that accepts all string which follow the language A = {w E {a,b} Number of a and b are equal.} 
+ Using Switch case , Finite Automata Logic.
+*/
+
+#include<stdio.h>
+
+#include<conio.h>
+
+#include<string.h>
+
+#include<stdlib.h>
+
+
+int main()
+
+{
+  char s[20],c;
+
+  int state=0, i=0, counta =0, countb = 0;
+  
+  printf("Enter a string:");
+
+  gets(s);
+
+  while(s[i]!='\0')
+
+  {
+
+    switch(state)
+
+    {
+
+    case 0:
+
+      c=s[i++];
+
+      if(c=='a')
+      {
+        state=0;
+        counta++;      
+      }
+      
+      else if(c=='b')
+      {
+        state=0;
+        countb++;
+      }
+      
+      else
+
+        state=6;
+
+      break;
+
+    case 6:
+
+      printf("%s is not recognised.",s);
+
+      exit(0);
+
+    }
+
+  }
+
+  if(state!=6 && counta == countb)
+
+    printf("%s follows the language A = {w E {a,b} Number of a and b are equal.}",s);
+
+  else
+
+    printf("%s is not recognised.   END   ",s);
+   
+   return 0;
+}

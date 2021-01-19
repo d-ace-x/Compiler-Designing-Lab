@@ -1,0 +1,102 @@
+/* PAN NUMBER is valid or not*/
+
+#include<stdio.h>
+
+#include<conio.h>
+
+#include<string.h>
+
+#include<stdlib.h>
+
+#include <cctype>
+
+int main()
+
+{
+  char s[20],c;
+
+  int state=0,i=0, checkA = 0, checkN = 0;
+  
+  printf("Enter a string:");
+
+  gets(s);
+
+  while(s[i]!='\0')
+
+  {
+
+    switch(state)
+
+    {
+
+    case 0:
+
+      c=s[i++];
+
+      if((c>=65 && c<=90) && checkA < 5)
+      {
+        state=0;
+        checkA++;
+      }
+      
+      else if((c>=48 && c<=57) && checkA == 5)
+      {
+        state=1;
+        checkN++;
+      }
+      else
+
+        state=6;
+
+      break;
+
+    case 1:
+
+      c=int(s[i++]);
+
+      if((c>=48 && c<=57) && checkN < 4)
+      {
+        state=1;
+        checkN++;
+      }
+      
+      else if((c>=65 && c<=90) && checkN == 4)
+      {
+        state=2;
+      }
+      else
+
+        state=6;
+        
+      break;
+
+    case 2:
+
+      c=int(s[i++]);
+      
+      if(c != '\0')
+
+        state=6;
+
+      break;
+
+    case 6:
+
+      printf("%s is not recognised.",s);
+
+      exit(0);
+
+    }
+
+  }
+
+  if(state!=6)
+
+    printf("%s is a valid PAN card number.",s);
+
+  else
+
+    printf("%s is not recognised.   END   ",s);
+   
+   return 0;
+}

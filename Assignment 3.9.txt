@@ -1,0 +1,88 @@
+/*
+ C program to implement PDA that accepts all string which follow the language A = { wcrc | wE{a,b} } 
+ Using Stack.
+*/
+
+#include <iostream> 
+#include <cstring> 
+#include <stdlib.h>
+#include <stack> 
+
+using namespace std; 
+using std::strlen;
+
+struct MyStack 
+{ 
+    stack <char> s; 
+  
+    // Remove the top element from MyStack 
+    void pop() 
+    { 
+        if (s.empty()) 
+        { 
+            cout << "Stack is empty\n"; 
+            return;                                          
+        } 
+  
+        int t = s.top(); 
+        s.pop(); 
+    } 
+  
+    void push(int x) 
+    { 
+        // Insert new number into the stack 
+           s.push(x); 
+    }
+    char top() 
+    { 
+          return s.top(); 
+    } 
+
+}; 
+
+int isAccepted(char * str) 
+{  
+   MyStack s; 
+   s.push('x');
+   for(int i =0; i<(strlen(str)/2)-1; i++)
+   {
+       if(str[(strlen(str)/2)-1] == 'c')
+       {
+           if(str[i] == 'a')
+              {
+                  s.push('a');
+              }
+           else if(str[i] == 'b')
+           { 
+              s.push('b');
+           }
+           else
+              return 0;
+        }
+   }
+
+   for(int j = strlen(str)-2; j >= strlen(str)/2; j--)
+   {
+       if(str[strlen(str)-1] == 'r')
+       {
+         if(s.top() == str[j])
+            s.pop();
+         else
+            return 0;
+       }   
+    }
+   if(s.top() == 'x')
+      return 1;
+   else
+      return 0;
+} 
+  
+int main() 
+{ 
+    char str[] = "abcabr"; 
+    if (isAccepted(str)) 
+        printf("ACCEPTED"); 
+    else
+        printf("NOT ACCEPTED"); 
+    return 0; 
+} 

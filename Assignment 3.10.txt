@@ -1,0 +1,84 @@
+/* 
+C program to implement PDA that accepts all string which follow the language A = {w E {a,b} Number of a and b are equal.} 
+Using Stack.
+*/
+
+#include <iostream> 
+#include <cstring> 
+#include <stdlib.h>
+#include <stack> 
+
+using namespace std; 
+using std::strlen;
+
+struct MyStack 
+{ 
+    stack <int> s; 
+  
+    // Remove the top element from MyStack 
+    void pop() 
+    { 
+        if (s.empty()) 
+        { 
+            cout << "Stack is empty\n"; 
+            return;                                          
+        } 
+  
+        int t = s.top(); 
+        s.pop(); 
+    } 
+  
+    void push(int x) 
+    { 
+        // Insert new number into the stack 
+           s.push(x); 
+    }
+    int top() 
+    { 
+          return s.top(); 
+    } 
+
+}; 
+
+int isAccepted(char * str) 
+{  
+   MyStack s; 
+   s.push(0);
+
+   if(str[0] == 'a')
+      for(int i = 0; i< strlen(str); i++)
+       {
+           if(str[i] == 'a')
+              s.push(1);
+           else if(str[i] == 'b')
+              s.pop();
+           else
+              return 0;
+       }
+
+   if(str[0] == 'b')
+      for(int i = 0; i< strlen(str); i++)
+       {
+           if(str[i] == 'b')
+              s.push(1);
+           else if(str[i] == 'a')
+              s.pop();
+           else
+              return 0;
+       }
+
+   if(s.top() == 0)
+      return 1;
+   else
+      return 0;
+} 
+  
+int main() 
+{ 
+    char str[] = "aabb"; 
+    if (isAccepted(str)) 
+        printf("ACCEPTED"); 
+    else
+        printf("NOT ACCEPTED"); 
+    return 0; 
+} 

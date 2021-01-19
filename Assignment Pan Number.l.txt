@@ -1,0 +1,15 @@
+lex code to accept a valid Pan Card Number 
+% 
+{ 
+int flag = 0; % 
+} % 
+% [A-Z]{5} + [0-9]{4} + [A-Z]
+flag = 1; % 
+% 
+main() { 
+yylex(); 
+if (flag == 1) 
+	printf(Accepted); 
+else
+	printf(Not Accepted); 
+} 

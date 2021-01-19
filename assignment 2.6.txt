@@ -1,0 +1,39 @@
+/* C++ program to check if a string is of the form ab*c. */
+
+#include<iostream>
+#include<cstring>
+using namespace std; 
+
+// Returns true str is of the form ab*c.
+bool isAnBn(char * str)
+{
+    int n = strlen(str);
+    int state = 0;
+    cout<<str[n];
+    if(str[0] == 'a' && str[n] == 'c')
+    {
+        for(int i = 1; i<n; i++)
+        {
+            if(str[i] == 'b')
+                state = 1;
+            else
+            {
+                state = 0;
+                return false;
+            }
+        }
+        
+    }
+    if(state == 1)
+    return true;
+}
+ 
+
+int main()
+{
+    char str[20];
+    std::cout<<"\nEnter the string\n";
+    std::cin>>str;
+    isAnBn(str) ? cout << "Yes" : cout << "No";
+    return 0;
+}
